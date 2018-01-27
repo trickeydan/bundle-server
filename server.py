@@ -7,34 +7,18 @@
 
 import json
 from flask import Flask, request, render_template
-import spotipy
-import spotipy.util as util
 from Song import Song
-import spconfig
+from SpotifyWrapper import SpotifyWrapper
 
 print("Bundle Server")
-print("Authenticating with Spotify...")
-token = util.prompt_for_user_token(spconfig.spot_username,"playlist-read-private,playlist-read-collaborative",client_id=spconfig.spot_client_id,client_secret=spconfig.spot_client_secret,redirect_uri=spconfig.spot_redirect)
 
-if token:
-    print("Authenticated.")
-    sp = spotipy.Spotify(auth=token)
-    playlists = sp.user_playlists(spconfig.spot_username)
-    if(len(playlists) > 0):
-        print("\nAvailable Playlists:")
-        arr = {}
-        for playlist in playlists['items']:
+sw = SpotifyWrapper()
 
-            if playlist['owner']['id'] == spconfig.spot_username:
-                arr[len(arr) + 1] = playlist['id']
-                print(str(len(arr) -1)  + ") " + playlist['name'])
-        playlist_id = arr(int(raw_input("Please select a playlist: ")))
+playlists = sw.get_playlists()
+for key in playlists.keys():
+    print(key + ": " + playlists[key])
 
-    else:
-        print("You need to create a playlist.")
-
-else:
-    print("Unable to connect to spotify :()")
+playlist = str(input("Please choose a playlist: "))
 
 app = Flask(__name__)
 
@@ -48,10 +32,7 @@ def explore():
 
 @app.route('/api/v1/club/')
 def api_info():
-    song_data = {}
-    song_data["idno1"] = dict(Song("idno1"))
-    song_data["idno2"] = dict(Song("idno2"))
-    song_data["idno3"] = dict(Song("idno3"))
+    song_data = sw.get_playlist_tracks(playlist)
     club_data = {}
     club_data["name"] = "Timepiece"
     club_data["logo_url"] = "http://www.timepiecenightclub.co.uk/wp-content/uploads/2015/01/TP-logo-WHITE.png"
