@@ -20,8 +20,7 @@ class SpotifyWrapper(object):
             print("\nAvailable Playlists:")
             arr = {}
             for playlist in playlists['items']:
-                if playlist['owner']['id'] == spconfig.spot_username:
-                    arr[playlist['id']] = playlist['name']
+                arr[playlist['id']] = playlist['name']
             return arr
         else:
             print("No playlists found :(")

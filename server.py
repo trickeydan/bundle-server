@@ -12,15 +12,17 @@ from SpotifyWrapper import SpotifyWrapper
 
 print("Bundle Server")
 
-
-
 sw = SpotifyWrapper()
 
 playlists = sw.get_playlists()
+number = 1
+playlist_keys = {}
 for key in playlists.keys():
-    print(key + ": " + playlists[key])
+    print(str(number) + ": " + playlists[key])
+    playlist_keys[number] = key
+    number += 1
 
-playlist = str(input("Please choose a playlist: "))
+playlist = playlist_keys[int(input("Please choose a playlist: "))]
 
 app = Flask(__name__)
 
