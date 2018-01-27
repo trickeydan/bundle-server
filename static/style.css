@@ -12,6 +12,29 @@
   width:100%;
 }
 
+.playing-icon {
+  position: absolute;
+  top: 8px;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  line-height: 32px;
+  background: #555;
+  text-align: center;
+}
+
+.playing-icon::after {
+  content: "\f026";
+  font-family: "FontAwesome";
+  animation: playing 1s linear infinite;
+}
+
+@keyframes playing {
+  33% {content: "\f027"}
+  67% {content: "\f028"}
+}
+
 .logo {
   background-image:url(../../assets/img/TP-logo-WHITE.png);
   background-size:contain;

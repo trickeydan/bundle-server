@@ -1,0 +1,58 @@
+body {
+font-family: verdana, sans-serif;
+}
+
+.list {
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: stretch;
+}
+
+.banner {
+    position: relative;
+    border-radius: 8px;
+    height: 100px;
+    background: url(https://artistheader.scdn.co/7MhMgCo0Bl0Kukl93PZbYS/desktop_cat/ebd9e222-827c-4e3d-b67d-81b53b9dd840), rgba(0,0,0,.5);
+    background-position: 50% 50%;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 32px;
+    margin-bottom: 8px;
+}
+
+.bar {
+    border-radius: 8px 0 0 8px;
+    position:absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: rgba(0, 128, 255, .5);
+}
+
+.banner * {
+    z-index: 1;
+    margin-right: 1ch;
+}
+
+.albumart {
+    width:64px;
+    height: 64px;
+    border-radius: 8px;
+}
+
+.artist {
+    color: #ddd;
+}
+
+.details-wrapper {
+    color: white;
+    text-shadow: 0 0 .5ch rgba(0,0,0,.9);
+}
+
+.songtitle {
+    font-size: 200%;
+}
