@@ -1,5 +1,5 @@
 # Bundle Server
-Flask API Server for Bundle
+Flask Server for Bundle
 
 ## Install instructions
 
