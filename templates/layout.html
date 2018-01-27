@@ -13,8 +13,7 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="/static/spotify-web-api.js"></script>
-        <script src="/static/spotifycontroller.js"></script>
+        <script src="/static/controller.js"></script>
     </head>
     <body>
         <div class="container">
@@ -29,23 +28,35 @@
                     <span class="artist">Blur</span>
                 </div>
             </div>
-            <div class="progress">
+            <div class="progress" id=timer>
         <div class="progress-bar progress-bar-striped progress-bar-danger active" style="width: 20%;"></div>
-        <div class="progress-bar progress-bar-striped progress-bar-warning active" style="width: 20%;"></div>
-        <div class="progress-bar progress-bar-striped progress-bar-success  active" style="width: 40%;">3:12</div>
+        <div class="progress-bar progress-bar-striped progress-bar-primary active" style="width: 40%;">3:12</div>
+        <div class="progress-bar progress-bar-striped progress-bar-warning active" style="width: 30%;"></div>
+        <div class="progress-bar progress-bar-striped progress-bar-success active" style="width: 40%;">3:12</div>
     </div>
     <span class="choose">Choose a song from the bundle to play next</span>
-
         </div>
         <div class="container">
-            <div class="list" id=bundle></div>
+            <div id=bundle></div>
             <div id="app-tabs">
                 <div class="app-tab selected">Vote</div>
                 <div class="app-tab">Explore</div>
             </div>
         </div>
         <script>
-                grab_songs("#banner");
+            grabBundle("#bundle");
+            const MAX = 20;
+            var remaining = MAX;
+
+            function timer() {
+                if(--remaining == 0) {
+                    setTimeout(function() {window.location.reload(false)}, 2000);
+                } else {
+                    updateTimer(remaining, MAX);
+                    setTimeout(timer, 1000);
+                }
+            };
+            timer();
         </script>
     </body>
 </html>

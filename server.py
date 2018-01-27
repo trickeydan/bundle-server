@@ -20,8 +20,6 @@ for key in playlists.keys():
 
 playlist = str(input("Please choose a playlist: "))
 
-app = Flask(__name__)
-
 @app.route('/')
 def vote():
     return render_template('vote.html')
@@ -48,8 +46,8 @@ def api_vote():
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return "Um, that doesn't exist"
+    return "Um, that doesn't exist", 404
 
 @app.errorhandler(405)
 def page_not_found(error):
-    return "Incorrect Request Type"
+    return "Incorrect Request Type", 405
