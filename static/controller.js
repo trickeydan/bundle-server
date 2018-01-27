@@ -6,14 +6,16 @@ function updateTimer(remaining, maximum) {
     var timeStr = formatTime(remaining);
     remaining /= maximum
     var i = 0;
+    var displayFound = false;
 
     $("#timer").children("div").each(function() {
         var width = Math.min(remaining, (i+1) * .1);
         remaining -= width;
         $(this).width((width * 100) + "%");
 
-        if(remaining == 0) {
+        if(!displayFound && remaining == 0) {
             $(this).html(timeStr);
+            displayFound = true;
         } else {
             $(this).html("");
         }
@@ -25,7 +27,7 @@ function formatTime(seconds) {
     var minutes = Math.floor(seconds / 60);
     seconds %= 60;
 
-    return minutes + ":" + seconds;
+    return minutes + ":" + pad(seconds, 2);
 }
 
 function createBanner(id, song) {
@@ -77,6 +79,12 @@ function getMaxVote() {
         }
     }
     return max;
+}
+
+function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
 function updateBanners() {
