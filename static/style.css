@@ -1,0 +1,43 @@
+.inner-nowplaying {
+  display:table-cell;
+  text-align:center;
+  padding:8px;
+  margin:4px;
+  background:rgba(0,0,0,.3);
+  font-style:italic;
+}
+
+.outer-nowplaying {
+  display:table;
+  width:100%;
+}
+
+.logo {
+  background-image:url(../../assets/img/TP-logo-WHITE.png);
+  background-size:contain;
+  background-repeat: no-repeat;
+  width:50%;
+  background-position:50% 50%;
+}
+
+#app-tabs {
+  display:table;
+  width:100%;
+  position:fixed;
+  bottom:0;
+  left:0;
+  background:rgba(0,0,0,.5);
+}
+
+.app-tab {
+  display:table-cell;
+  width:10%;
+  text-align:center;
+  padding:16px;
+}
+
+.app-tab.selected {
+  background-color:rgba(0,0,0,.5);
+  font-weight:bold;
+  box-shadow:0 -4px 0 purple inset;
+}
