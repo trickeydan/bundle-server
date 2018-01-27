@@ -31,13 +31,14 @@ function formatTime(seconds) {
 }
 
 function createBanner(id, song) {
+    song = song["track"]
+
     return bannerMap[id] = $("<div class=banner></div>")
-        .css("background-image", "url(" + song["artist_image"] + ")")
-        .append("<div class=bar></div>")
-        .append($("<img class=albumart>").attr("src", song["cover_url"]))
+        .append($("<div class=bar></div>"))
+        .append($("<img class=albumart>").attr("src", song["album"]["images"][0]["url"]))
         .append($("<div class=details-wrapper></div>")
-            .append($("<div class=songtitle></div>").html(song["title"]))
-            .append($("<div class=artist></div>").html(song["artist"])))
+            .append($("<div class=songtitle></div>").html(song["name"]))
+            .append($("<div class=artist></div>").html(song["artists"][0]["name"])))
         
         .click(function() {
             castVote(id);
@@ -106,8 +107,9 @@ function grabBundle(bundle) {
     $.getJSON("/api/v1/club/", function(data) {
         bundle.empty();
 
-        for(var key in data["songs"]) {
-            var song = data["songs"][key];
+        var items = data["songs"]["items"];
+        for(var key in items) {
+            var song = items[key];
 
             bundle.append(createBanner(key, song));
         }
