@@ -1,19 +1,18 @@
 body {
-font-family: verdana, sans-serif;
+    font-family: verdana, sans-serif;
 }
 
-.list {
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-align-items: stretch;
+#bundle {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
 }
 
 .banner {
     position: relative;
     border-radius: 8px;
     height: 100px;
-    background: url(https://artistheader.scdn.co/7MhMgCo0Bl0Kukl93PZbYS/desktop_cat/ebd9e222-827c-4e3d-b67d-81b53b9dd840), rgba(0,0,0,.5);
     background-position: 50% 50%;
     display:flex;
     flex-direction: row;
@@ -31,6 +30,21 @@ align-items: stretch;
     left: 0;
     height: 100%;
     background: rgba(0, 128, 255, .5);
+    text-align: right;
+    overflow: hidden;
+    width: 0;
+}
+
+.bar::after {
+    content: attr(data-percent) "%";
+}
+
+.alarm {
+    animation: flash-border .5s linear infinite step-start;
+}
+
+@keyframes flash-border {
+    50% {}
 }
 
 .banner * {
