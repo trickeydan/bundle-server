@@ -60,14 +60,6 @@ body {
   background-position:50% 50%;
 }
 
-.logo {
-  background-image:url(../../assets/img/TP-logo-WHITE.png);
-  background-size:contain;
-  background-repeat: no-repeat;
-  width:50%;
-  background-position:50% 50%;
-}
-
 #app-tabs {
   display:table;
   width:100%;
@@ -117,6 +109,29 @@ body {
   background: white;
 }
 
+.flex-expand {
+  flex-grow: 1;
+}
+
+.vote-button {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  line-height: 32px;
+  background: #555;
+  text-align: center;
+  line-height: 64px;
+  font-size: 200%;
+  margin: 8px;
+  flex-shrink: 0;
+}
+
+.vote-button::after {font-family: "FontAwesome";}
+.vote-button.up {background: green}
+.vote-button.up::after {content: "\f164"}
+.vote-button.down {background: red}
+.vote-button.down::after {content: "\f165"}
+
 .banner > * {
   z-index: 1;
 }
@@ -161,8 +176,12 @@ body {
 
 .details-wrapper {
   color: #333;
+  flex-shrink: 1;
 }
 
 .songtitle {
   font-size: 200%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
