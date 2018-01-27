@@ -27,8 +27,8 @@ if token:
 
             if playlist['owner']['id'] == spconfig.spot_username:
                 arr[len(arr) + 1] = playlist['id']
-                print(str(len(arr) -1)  + ") " + playlist['name'])
-        playlist_id = arr(int(raw_input("Please select a playlist: ")))
+                print(str(len(arr))  + ") " + playlist['name'])
+        playlist_id = arr[int(input("Please select a playlist: "))]
 
     else:
         print("You need to create a playlist.")
