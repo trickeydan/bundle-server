@@ -29,14 +29,14 @@ if token:
                 arr[len(arr) + 1] = playlist['id']
                 print(str(len(arr))  + ") " + playlist['name'])
         playlist_id = arr[int(input("Please select a playlist: "))]
-
+        app = Flask(__name__)
     else:
         print("You need to create a playlist.")
 
 else:
     print("Unable to connect to spotify :()")
 
-app = Flask(__name__)
+
 
 @app.route('/')
 def vote():
@@ -49,9 +49,9 @@ def explore():
 @app.route('/api/v1/club/')
 def api_info():
     song_data = {}
-    song_data["idno1"] = dict(Song("idno1"))
-    song_data["idno2"] = dict(Song("idno2"))
-    song_data["idno3"] = dict(Song("idno3"))
+    song_data["idno1"] = Song("idno1").__dict__
+    song_data["idno2"] = Song("idno2").__dict__
+    song_data["idno3"] = Song("idno3").__dict__
     club_data = {}
     club_data["name"] = "Timepiece"
     club_data["logo_url"] = "http://www.timepiecenightclub.co.uk/wp-content/uploads/2015/01/TP-logo-WHITE.png"
@@ -67,8 +67,8 @@ def api_vote():
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return "Um, that doesn't exist"
+    return "Um, that doesn't exist", 404
 
 @app.errorhandler(405)
 def page_not_found(error):
-    return "Incorrect Request Type"
+    return "Incorrect Request Type", 405
