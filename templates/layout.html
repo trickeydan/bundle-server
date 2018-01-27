@@ -49,8 +49,12 @@
             var remaining = MAX;
 
             function timer() {
-                updateTimer(--remaining, MAX);
-                setTimeout(timer, 1000);
+                if(--remaining == 0) {
+                    setTimeout(function() {window.location.reload(false)}, 2000);
+                } else {
+                    updateTimer(remaining, MAX);
+                    setTimeout(timer, 1000);
+                }
             };
             timer();
         </script>
