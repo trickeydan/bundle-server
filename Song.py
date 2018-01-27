@@ -7,6 +7,3 @@ class Song(object):
         self.cover_url = "http://jazjaz.net/wp-content/uploads/2013/05/The-Black-Arrow-In-Bloom-Large_thumb.jpg"
         self.artist = "Psy"
         self.artist_image = "http://jazjaz.net/wp-content/uploads/2013/05/The-Black-Arrow-In-Bloom-Large_thumb.jpg"
-
-    def toDict(self):
-        return self.__dict__

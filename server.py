@@ -21,9 +21,9 @@ def explore():
 @app.route('/api/v1/club/')
 def api_info():
     song_data = {}
-    song_data["idno1"] = Song("idno1").toDict()
-    song_data["idno2"] = Song("idno2").toDict()
-    song_data["idno3"] = Song("idno3").toDict()
+    song_data["idno1"] = Song("idno1").__dict__
+    song_data["idno2"] = Song("idno2").__dict__
+    song_data["idno3"] = Song("idno3").__dict__
     club_data = {}
     club_data["name"] = "Timepiece"
     club_data["logo_url"] = "http://www.timepiecenightclub.co.uk/wp-content/uploads/2015/01/TP-logo-WHITE.png"
