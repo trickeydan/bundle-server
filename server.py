@@ -12,6 +12,8 @@ from SpotifyWrapper import SpotifyWrapper
 
 print("Bundle Server")
 
+
+
 sw = SpotifyWrapper()
 
 playlists = sw.get_playlists()
@@ -19,6 +21,8 @@ for key in playlists.keys():
     print(key + ": " + playlists[key])
 
 playlist = str(input("Please choose a playlist: "))
+
+app = Flask(__name__)
 
 @app.route('/')
 def vote():
