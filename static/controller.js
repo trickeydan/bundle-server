@@ -40,6 +40,10 @@ function createBanner(id, song) {
             .append($("<div class=songtitle></div>").html(song["name"]))
             .append($("<div class=artist></div>").html(song["artists"][0]["name"])))
         
+        .append($("<div class=\"flex-expand\"></div>"))
+        .append($("<div class=\"vote-button up\"></div>"))
+        .append($("<div class=\"vote-button down\"></div>"))
+        
         .click(function() {
             castVote(id);
         });
