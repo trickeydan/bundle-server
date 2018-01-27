@@ -6,6 +6,8 @@
 # Written by D.G.Trickey and S.J.McCreery
 
 from flask import Flask, request, render_template
+from Song import Song
+import json
 app = Flask(__name__)
 
 @app.route('/')
@@ -18,7 +20,16 @@ def explore():
 
 @app.route('/api/v1/club/')
 def api_info():
-    return 'JSONNNNN'
+    song_data = {}
+    song_data["idno1"] = Song("idno1").toDict()
+    song_data["idno2"] = Song("idno2").toDict()
+    song_data["idno3"] = Song("idno3").toDict()
+    club_data = {}
+    club_data["name"] = "Timepiece"
+    club_data["logo_url"] = "http://www.timepiecenightclub.co.uk/wp-content/uploads/2015/01/TP-logo-WHITE.png"
+    club_data["time_expire"] = 1517061942
+    club_data["songs"] = song_data
+    return json.JSONEncoder().encode(club_data)
 
 @app.route('/api/v1/club/vote', methods=['POST'])
 def api_vote():
