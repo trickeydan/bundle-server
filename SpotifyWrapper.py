@@ -1,6 +1,10 @@
 import spotipy
 import spotipy.util as util
-import spconfig
+
+try:
+    import spconfig
+except:
+    print ("You need a config file!")
 
 class SpotifyWrapper(object):
 
