@@ -33,20 +33,31 @@ function formatTime(seconds) {
 function createBanner(id, song) {
     song = song["track"]
 
-    return bannerMap[id] = $("<div class=banner></div>")
-        .append($("<div class=bar></div>"))
-        .append($("<img class=albumart>").attr("src", song["album"]["images"][0]["url"]))
-        .append($("<div class=details-wrapper></div>")
-            .append($("<div class=songtitle></div>").html(song["name"]))
-            .append($("<div class=artist></div>").html(song["artists"][0]["name"])))
-        
-        .append($("<div class=\"flex-expand\"></div>"))
+    var banner = bannerMap[id] = $("<div class=banner></div>")
         .append($("<div class=\"vote-button up\"></div>"))
+
+        .append($("<div class=details-wrapper></div>")
+            .append($("<img class=albumart>"))
+            .append($("<span class=songtitle></span>"))
+            .append($("<br>"))
+            .append($("<span class=artist></span>")))
+
         .append($("<div class=\"vote-button down\"></div>"))
         
         .click(function() {
             castVote(id);
         });
+
+    loadBanner(banner, song);
+    return banner;
+}
+
+function loadBanner(banner, song) {
+    banner = $(banner);
+
+    banner.find(".albumart").attr("src", song["album"]["images"][0]["url"]);
+    banner.find(".songtitle").html(song["name"]);
+    banner.find(".artist").html(song["artists"][0]["name"]);
 }
 
 function getVote(id) {
@@ -92,7 +103,7 @@ function pad(n, width, z) {
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
-function updateBanners() {
+/*function updateBanners() {
     var totalVotes = getVoteCount();
 
     for(id in bannerMap) {
@@ -103,7 +114,7 @@ function updateBanners() {
         banner.find(".bar").width(percentage + "%")
             .attr("data-percent", Math.round(percentage));
     }
-}
+}*/
 
 function grabBundle(bundle) {
     bundle = $(bundle);
@@ -117,5 +128,14 @@ function grabBundle(bundle) {
 
             bundle.append(createBanner(key, song));
         }
-    })
+        updatePlaying(data["curr_song"]);
+
+        var duration = Math.floor(data["curr_song"]["duration_ms"] / 1000);
+        startTimer(duration);
+    });
+}
+
+function updatePlaying(song) {
+    const playing = $("#nowplaying")
+    loadBanner(playing, song);
 }

@@ -1,13 +1,16 @@
 body {
   background: radial-gradient(farthest-corner, #3a0e46 0%, #203 100%);
   font-family: verdana, sans-serif;
+  font-size: 75%;
+  margin-bottom: 80px;
 }
 
 #top-bar {
   display: block;
   width: 100%;
-  height: 80px;
+  height: 32px;
   background: white url(/static/logo.png) center no-repeat;
+  background-size: auto 75%;
   margin-bottom: 16px;
 }
 
@@ -15,30 +18,16 @@ body {
   box-shadow: 0 2px 4px 4px rgba(0,0,0,.3);
 }
 
-.inner-nowplaying {
-  display:table-cell;
-  text-align:center;
-  padding:8px;
-  margin:4px;
-  background:rgba(0,0,0,.3);
-  font-style:italic;
-}
-
-.outer-nowplaying {
-  display:table;
-  width:100%;
-}
-
 .playing-icon {
-  position: absolute;
-  top: 8px;
-  right: 0;
+  flex-shrink: 0;
   width: 32px;
   height: 32px;
   border-radius: 16px;
   line-height: 32px;
   background: #555;
   text-align: center;
+  margin: 0 16px;
+  font-size: 200%;
 }
 
 .playing-icon::after {
@@ -68,6 +57,7 @@ body {
   left:0;
   background:rgba(0,0,0,.5);
   z-index: 2;
+  height: 64px;
 }
 
 .app-tab {
@@ -75,6 +65,7 @@ body {
   width:10%;
   text-align:center;
   padding:16px;
+  font-size: 300%;
 }
 
 .app-tab.selected {
@@ -97,39 +88,48 @@ body {
 .banner {
   position: relative;
   border-radius: 2px;
-  height: 100px;
+  height: 64px;
   background-position: 50% 50%;
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
-  padding: 0 32px;
   margin-bottom: 8px;
   background: white;
 }
 
-.flex-expand {
-  flex-grow: 1;
+.banner.locked {
+  opacity: .5;
+}
+
+.banner.now {
+  padding: 0 16px;
 }
 
 .vote-button {
-  width: 64px;
-  height: 64px;
-  border-radius: 32px;
-  line-height: 32px;
-  background: #555;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 20%;
   text-align: center;
   line-height: 64px;
-  font-size: 200%;
-  margin: 8px;
-  flex-shrink: 0;
+  font-size: 300%;
+  height: 100%;
 }
 
 .vote-button::after {font-family: "FontAwesome";}
-.vote-button.up {background: green}
+.vote-button.up {
+  background: #46b572;
+  box-shadow: -8px 0 4px -4px rgba(0,0,0,.5) inset;
+  border-radius: 2px 0 0 2px;
+}
 .vote-button.up::after {content: "\f164"}
-.vote-button.down {background: red}
+
+.vote-button.down {
+  background: #bf3f3f;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 8px 0 4px -4px rgba(0,0,0,.5) inset;
+}
 .vote-button.down::after {content: "\f165"}
 
 .banner > * {
@@ -164,10 +164,13 @@ body {
 }
 
 .albumart {
-  width:64px;
-  height: 64px;
+  width:48px;
+  height: 48px;
   border-radius: 4px;
-  margin-right: 1ch;
+  margin: 0 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .artist {
@@ -175,13 +178,16 @@ body {
 }
 
 .details-wrapper {
+  position: relative;
+  padding-left: 64px;
   color: #333;
   flex-shrink: 1;
+  flex-grow: 1;
+  overflow-x: scroll;
+  text-align: left;
+  height: 48px;
+  white-space: nowrap;
+  margin-right: 8px;
 }
 
-.songtitle {
-  font-size: 200%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
+.songtitle {font-size: 200%;}

@@ -1,18 +1,29 @@
 import spotipy
 import spotipy.util as util
-import spconfig
+from spotipy.oauth2 import SpotifyOAuth
+
+try:
+    import spconfig
+except:
+    print ("You need a config file!")
 
 class SpotifyWrapper(object):
 
     def __init__(self):
         print("Authenticating with Spotify...")
-        token = util.prompt_for_user_token(spconfig.spot_username,"playlist-read-private,playlist-read-collaborative",client_id=spconfig.spot_client_id,client_secret=spconfig.spot_client_secret,redirect_uri=spconfig.spot_redirect)
+        #token = util.prompt_for_user_token(spconfig.spot_username,"playlist-read-private,playlist-read-collaborative",client_id=spconfig.spot_client_id,client_secret=spconfig.spot_client_secret,redirect_uri=spconfig.spot_redirect)
 
-        if token:
+        try:
+
+            spo = SpotifyOAuth(spconfig.spot_client_id,spconfig.spot_client_secret,spconfig.spot_redirect,scope="playlist-read-private,playlist-read-collaborative",cache_path=spconfig.spot_cache)
+            print("DEBUG")
+            print(spo.get_cached_token())
+            self.sp = spotipy.Spotify(auth=spo.get_cached_token()["access_token"])
+            print(self.sp)
             print("Authenticated.")
-            self.sp = spotipy.Spotify(auth=token)
-        else:
+        except:
             print("Unable to connect to spotify :(")
+
 
     def get_playlists(self):
         playlists = self.sp.user_playlists(spconfig.spot_username)
