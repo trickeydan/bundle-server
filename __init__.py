@@ -47,5 +47,3 @@ def page_not_found(error):
 @app.errorhandler(405)
 def page_not_found(error):
     return "Incorrect Request Type", 405
-if __name__ == "__main__":
-    app.run()

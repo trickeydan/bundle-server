@@ -1,7 +1,8 @@
 import sqlite3
+import spconfig
 from SpotifyWrapper import SpotifyWrapper
 
-database = sqlite3.connect("bundle.db")
+database = sqlite3.connect(spconfig.db_location)
 cursor = database.cursor()
 
 def init_db():
@@ -28,7 +29,8 @@ class SongManager(object):
             playlist_keys[number] = key
             number += 1
 
-        self.playlist_id = playlist_keys[int(input("Please choose a playlist: "))]
+        self.playlist_id = spconfig.spot_playlist
+
 
     def get_polling_tracks(self):
         return self.sw.get_playlist_tracks(self.playlist_id,offset=0)
