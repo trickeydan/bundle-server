@@ -7,22 +7,11 @@
 
 import json
 from flask import Flask, request, render_template
-from Song import Song
-from SpotifyWrapper import SpotifyWrapper
+from SongManager import SongManager
 
 print("Bundle Server")
 
-sw = SpotifyWrapper()
-
-playlists = sw.get_playlists()
-number = 1
-playlist_keys = {}
-for key in playlists.keys():
-    print(str(number) + ": " + playlists[key])
-    playlist_keys[number] = key
-    number += 1
-
-playlist = playlist_keys[int(input("Please choose a playlist: "))]
+sm = SongManager()
 
 app = Flask(__name__)
 
@@ -36,12 +25,13 @@ def explore():
 
 @app.route('/api/v1/club/')
 def api_info():
-    song_data = sw.get_playlist_tracks(playlist)
     club_data = {}
     club_data["name"] = "Timepiece"
     club_data["logo_url"] = "http://www.timepiecenightclub.co.uk/wp-content/uploads/2015/01/TP-logo-WHITE.png"
-    club_data["time_expire"] = 1517061942
-    club_data["songs"] = song_data
+    club_data["time_expire"] = sm.curr_expire_time()
+    club_data["songs"] = sm.get_polling_tracks()
+    club_data["curr_song"] = sm.get_curr_track()
+
     return json.JSONEncoder().encode(club_data)
 
 @app.route('/api/v1/club/vote', methods=['POST'])

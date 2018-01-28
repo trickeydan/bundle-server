@@ -27,4 +27,7 @@ class SpotifyWrapper(object):
             return None
 
     def get_playlist_tracks(self,playlist_id,offset=0,quantity=5):
-        return self.sp.user_playlist_tracks(spconfig.spot_username,playlist_id=playlist_id,fields="items.track.id,items.track.name,items.track.duration_ms,items.track.artists.name,items.track.album.images.url",limit=offset+quantity,offset=offset)
+        return self.sp.user_playlist_tracks(spconfig.spot_username,playlist_id=playlist_id,fields="items.track.id,items.track.name,items.track.duration_ms,items.track.artists.name,items.track.album.images.url",limit=quantity,offset=offset)
+
+    def get_track(self,track_id):
+        return self.sp.track(track_id)
