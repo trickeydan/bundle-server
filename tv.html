@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<style>
+html {
+    height: 100%;
+}
+
+body {
+    padding: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: 75%;
+    background: radial-gradient(farthest-corner, #3a0e46 0%, #203 100%);
+}
+
+.bar-outer {
+    display: block;
+    width: 20%;
+    margin-right: 1%;
+    position: relative;
+    height: 100%;
+}
+
+.bar-inner {
+    background: linear-gradient(0deg, green, yellow, orange, red);
+    background-position: bottom;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 -4px 4px 4px rgba(0,0,0,.5);
+}
+
+.image {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    width: 64px;
+    height: 64px;
+    border-radius: 4px;
+}
+</style>
+
+<body></body>
+<script>
+    var bars = [];
+
+    var images = [
+    "https://i.scdn.co/image/e9217132923c8da9f8fb49e21312442d828bc4ab",
+    "https://i.scdn.co/image/6db02ffa059b4010d37e469c20400802c5fdd0c5",
+    "https://i.scdn.co/image/ae4a3f3d3e9dfcbf0684fcd7aaed3cf65d20c255",
+    "https://i.scdn.co/image/785563f4617b87950534208622342c2ee9c6190a",
+    "https://i.scdn.co/image/d678199538ac8bef313f9f98d848a3f81c50c308"
+    ];
+
+    for(var i = 0; i < 5; i++) {
+        var bar = document.createElement("div");
+        bar.className = "bar-outer";
+
+        var inner = document.createElement("div");
+        inner.className = "bar-inner";
+        inner.style.height = "50%";
+
+        var image = document.createElement("img");
+        image.className = "image";
+        image.src = images[i];
+
+        bar.appendChild(inner);
+        bar.appendChild(image);
+        document.body.appendChild(bar);
+        bars.push(inner);
+    }
+
+    function update() {
+        for(var i = 0; i < bars.length; i++) {
+            var bar = bars[i];
+            var size = parseInt(bar.style.height);
+
+            size += Math.round(Math.random() * 4 - 2);
+            bar.style.height = size + "%";
+        }
+        setTimeout(update, 100);
+    }
+    update();
+</script>
+</body>
