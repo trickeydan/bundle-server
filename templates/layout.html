@@ -18,9 +18,9 @@
         <div id=top-bar></div>
 
         <div class="container">
-            <div class="banner">
-                <img class="albumart" src="https://i.scdn.co/image/306578e65b8d30fe58e6fd9e42d84d251414da29">
+            <div class="banner now" id="nowplaying">
                 <div class="playing-icon"></div>
+                <img class="albumart" src="https://i.scdn.co/image/306578e65b8d30fe58e6fd9e42d84d251414da29">
 
                 <div class="details-wrapper">
                     <span class="songtitle">Coffee and TV</span><br>
@@ -44,18 +44,22 @@
         </div>
         <script>
             grabBundle("#bundle");
-            const MAX = 20;
-            var remaining = MAX;
+
+            var _duration, remaining;
+
+            function startTimer(duration) {
+                remaining = _duration = duration - 20;
+                timer();
+            }
 
             function timer() {
                 if(--remaining == 0) {
                     setTimeout(function() {window.location.reload(false)}, 2000);
                 } else {
-                    updateTimer(remaining, MAX);
+                    updateTimer(remaining, _duration);
                     setTimeout(timer, 1000);
                 }
             };
-            timer();
         </script>
     </body>
 </html>
