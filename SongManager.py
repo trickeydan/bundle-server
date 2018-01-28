@@ -27,7 +27,7 @@ class SongManager(object):
 
     def get_polling_tracks(self):
         random_offset = randrange(0,50)
-        return self.sw.get_playlist_tracks(self.playlist_id,offset=0)
+        return self.sw.get_playlist_tracks(self.playlist_id,offset=random_offset)
 
     def get_curr_track(self):
         return self.sw.get_track(self.curr_song)
