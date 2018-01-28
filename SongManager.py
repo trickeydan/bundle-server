@@ -1,5 +1,6 @@
 import sqlite3
 import spconfig
+from random import randrange
 from SpotifyWrapper import SpotifyWrapper
 
 database = sqlite3.connect(spconfig.db_location)
@@ -21,19 +22,12 @@ class SongManager(object):
         self.offset = 0
         self.curr_song = "53RJvlt7Y2QiJ6b28LaC3t"
 
-        playlists = self.sw.get_playlists()
-        number = 1
-        playlist_keys = {}
-        for key in playlists.keys():
-            print(str(number) + ": " + playlists[key])
-            playlist_keys[number] = key
-            number += 1
-
         self.playlist_id = spconfig.spot_playlist
 
 
     def get_polling_tracks(self):
-        return self.sw.get_playlist_tracks(self.playlist_id,offset=0)
+        random_offset = randrange(0,50)
+        return self.sw.get_playlist_tracks(self.playlist_id,offset=random_offset)
 
     def get_curr_track(self):
         return self.sw.get_track(self.curr_song)
