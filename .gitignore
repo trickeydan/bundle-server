@@ -104,3 +104,4 @@ ENV/
 spconfig.py
 test.py
 .cache*
+*.db
