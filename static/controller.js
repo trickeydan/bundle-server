@@ -36,13 +36,12 @@ function createBanner(id, song) {
     var banner = bannerMap[id] = $("<div class=banner></div>")
         .append($("<div class=\"vote-button up\"></div>"))
 
-        .append($("<img class=albumart>"))
         .append($("<div class=details-wrapper></div>")
+            .append($("<img class=albumart>"))
             .append($("<span class=songtitle></span>"))
             .append($("<br>"))
             .append($("<span class=artist></span>")))
-        
-        .append($("<div class=\"flex-expand\"></div>"))
+
         .append($("<div class=\"vote-button down\"></div>"))
         
         .click(function() {
