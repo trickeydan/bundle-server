@@ -1,6 +1,8 @@
 # Bundle Server
 Flask Server for Bundle
 
+This software is licenced under GNU GPLv3.
+
 ## Install instructions
 
 git clone
